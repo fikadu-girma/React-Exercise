@@ -7,11 +7,13 @@ import Userlog from './Userlog.jsx'
 import List from './List.jsx'
 import Lists from './Lists.jsx'
 import Button from './Button.jsx'
+import Steps from './steps.jsx'
 
 function App(){
   return(
     <>
       <Header/>
+      <Steps />
       <Student name="Patric" age={21} isStudent={true}/>
       <Food/>
       <Profilr/>
