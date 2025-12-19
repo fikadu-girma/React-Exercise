@@ -8,12 +8,14 @@ import List from './List.jsx'
 import Lists from './Lists.jsx'
 import Button from './Button.jsx'
 import Steps from './steps.jsx'
+import Flashcard from './fleshcard.jsx'
 
 function App(){
   return(
     <>
       <Header/>
-      <Steps />
+      <Flashcard/>
+      <Steps/>
       <Student name="Patric" age={21} isStudent={true}/>
       <Food/>
       <Profilr/>
