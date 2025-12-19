@@ -1,16 +1,34 @@
-# React + Vite
+⚛️ ReactJS Practice Exercises
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A collection of functional components and mini-projects developed to master React.js in 2025. This repository serves as a sandbox for experimenting with hooks, state management, and modern UI patterns.
 
-Currently, two official plugins are available:
+🚀 Projects & Exercises
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Exercise Name	Description	Concepts Covered
 
-## React Compiler
+01. Task Tracker	A simple CRUD application for daily tasks.	useState, useEffect, LocalStorage
+02. Weather Dashboard	Real-time weather data using a third-party API.	Fetch API, Async/Await, Environment Variables
+03. Theme Switcher	A Dark/Light mode toggle for a landing page.	useContext, Styled Components
+04. Custom Hooks Lab	Implementing reusable logic for forms and window resizing.	Custom Hooks, Composition
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+🛠️ Tech Stack
 
-## Expanding the ESLint configuration
+Core: React 19
+Build Tool: Vite
+Styling: Tailwind CSS / CSS Modules
+State Management: Context API / Redux Toolkit (if applicable)
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+📥 Getting Started
+
+Prerequisites
+Ensure you have Node.js (v20 or higher) installed.
+
+📝 Learning Objectives
+
+Mastering the lifecycle of functional components.
+Handling complex state across multiple components.
+Integrating external REST APIs.
+Writing clean, modular, and reusable JSX.
+
+🤝 Contributing
+Since this is a personal exercise repo, I am not currently looking for contributions. However, feel free to fork this repo to use these exercises as a starting point for your own learning!
