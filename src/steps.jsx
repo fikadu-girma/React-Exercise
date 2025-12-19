@@ -8,6 +8,7 @@ const messages = [
 
 function Steps(){
     const [step, setStep] = useState(1);
+    const [isopen, setIsOpen] = useState(true);
 
     const previouss = () => {
         if(step > 1) setStep(step - 1);
@@ -18,7 +19,9 @@ function Steps(){
   }
 
   return(
-    <div className="steps">
+    <div>
+      <button className="close" onClick={() => setIsOpen(!isopen)}>&times;</button>
+    {isopen && <div className="steps">
       <div className="numbers">
         <div className= {`${step >= 1 ? "active" : ""}`}>1</div>
         <div className= {`${step >= 2 ? "active" : ""}`}>2</div>
@@ -32,7 +35,10 @@ function Steps(){
         <button style={{backgroundColor: 'grey', color: 'white'}} onClick={() => nextss()}>Next</button>
       </div>
     </div>
+}
+</div>
   );
+
 }
 
 export default Steps
