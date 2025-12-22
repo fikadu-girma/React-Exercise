@@ -9,6 +9,7 @@ import Lists from './Lists.jsx'
 import Button from './Button.jsx'
 import Steps from './steps.jsx'
 import Flashcard from './fleshcard.jsx'
+import MovieSearch from './MovieSearch.jsx'
 
 function App(){
   return(
@@ -24,6 +25,7 @@ function App(){
       <Profilr/>
       <Userlog isLoggedIn = {true} username = "patrik"/>
       <List/>
+      <MovieSearch/>
       <Button/>
       <Footer/>
     </>
