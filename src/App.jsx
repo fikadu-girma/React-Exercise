@@ -10,6 +10,7 @@ import Button from './Button.jsx'
 import Steps from './steps.jsx'
 import Flashcard from './fleshcard.jsx'
 import MovieSearch from './MovieSearch.jsx'
+import MovieShowcase from './MoviesShowcase.jsx'
 
 function App(){
   return(
@@ -26,6 +27,7 @@ function App(){
       <Userlog isLoggedIn = {true} username = "patrik"/>
       <List/>
       <MovieSearch/>
+      <MovieShowcase/>
       <Button/>
       <Footer/>
     </>
