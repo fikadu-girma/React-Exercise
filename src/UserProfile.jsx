@@ -1,13 +1,11 @@
 import { useReducer } from "react";
 
-/* 1️⃣ Initial State */
 const initialState = {
   name: "",
   age: 18,
   isOnline: false,
 };
 
-/* 2️⃣ Reducer Function */
 function profileReducer(state, action) {
   switch (action.type) {
     case "SET_NAME":
@@ -36,7 +34,6 @@ function profileReducer(state, action) {
   }
 }
 
-/* 3️⃣ Component */
 function UserProfile() {
   const [state, dispatch] = useReducer(profileReducer, initialState);
 
