@@ -11,6 +11,7 @@ import Steps from './steps.jsx'
 import Flashcard from './fleshcard.jsx'
 import MovieSearch from './MovieSearch.jsx'
 import MovieShowcase from './MoviesShowcase.jsx'
+import UserProfile from './UserProfile.jsx'
 
 function App(){
   return(
@@ -28,6 +29,7 @@ function App(){
       <List/>
       <MovieSearch/>
       <MovieShowcase/>
+      <UserProfile/>
       <Button/>
       <Footer/>
     </>
