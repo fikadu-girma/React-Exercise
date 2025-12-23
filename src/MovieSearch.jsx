@@ -1,15 +1,14 @@
 import React, { useState } from "react";
-import MovieHistory from "./MovieHistory"; // import the history component
+import MovieHistory from "./MovieHistory";
 
 const MovieSearch = () => {
   const [query, setQuery] = useState("");
   const [movie, setMovie] = useState(null);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const [history, setHistory] = useState([]); // store searched movies
+  const [history, setHistory] = useState([]); 
 
-  const API_KEY = "thewdb"; // demo key — you can get your own at https://www.omdbapi.com/apikey.aspx
-
+  const API_KEY = "thewdb";
   const handleSearch = async () => {
     if (!query) return;
     setLoading(true);
@@ -23,7 +22,6 @@ const MovieSearch = () => {
       if (data.Response === "True") {
         setMovie(data);
 
-        // Add to history (if not already there)
         setHistory((prev) => {
           const exists = prev.find((m) => m.imdbID === data.imdbID);
           return exists ? prev : [data, ...prev];
