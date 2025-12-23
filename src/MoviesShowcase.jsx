@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
-import "./MovieShowcase.css"; // We'll add the animation styles here
+import "./MovieShowcase.css"; 
 
 const MovieShowcase = () => {
   const [currentTime, setCurrentTime] = useState(new Date());
 
-  // Update the time every second
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentTime(new Date());
@@ -13,7 +12,6 @@ const MovieShowcase = () => {
     return () => clearInterval(timer);
   }, []);
 
-  // Some example movie posters (you can replace these with your own)
   const movies = [
     "https://m.media-amazon.com/images/M/MV5BNzA5ZDMzNzUt.jpg",
     "https://m.media-amazon.com/images/M/MV5BM2MyNjYxNmYt.jpg",
@@ -23,7 +21,6 @@ const MovieShowcase = () => {
     "https://m.media-amazon.com/images/M/MV5BMTc3MjYzNzA0MV5BMl5BanBnXkFtZTgwNjc3NDM0NzE@._V1_.jpg",
   ];
 
-  // Format the current time
   const formatTime = (time) =>
     time.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", second: "2-digit" });
 

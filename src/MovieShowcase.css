@@ -28,7 +28,6 @@
   color: #ccc;
 }
 
-/* Poster scrolling section */
 .poster-container {
   width: 100%;
   overflow: hidden;
@@ -50,7 +49,6 @@
   transition: transform 0.3s;
 }
 
-/* Animation: move posters right → left */
 @keyframes scroll {
   from {
     transform: translateX(0);
@@ -60,12 +58,10 @@
   }
 }
 
-/* Pause animation on hover */
 .poster-container:hover .poster-strip {
   animation-play-state: paused;
 }
 
-/* Optional hover effect on individual posters */
 .poster:hover {
   transform: scale(1.05);
   cursor: pointer;
