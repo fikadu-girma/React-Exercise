@@ -12,6 +12,7 @@ import Flashcard from './fleshcard.jsx'
 import MovieSearch from './MovieSearch.jsx'
 import MovieShowcase from './MoviesShowcase.jsx'
 import UserProfile from './UserProfile.jsx'
+import Demoreducer from './Demoreducer.jsx'
 
 function App(){
   return(
@@ -30,6 +31,7 @@ function App(){
       <MovieSearch/>
       <MovieShowcase/>
       <UserProfile/>
+      <Demoreducer/>
       <Button/>
       <Footer/>
     </>
