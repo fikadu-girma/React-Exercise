@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import "./index.css";
 
 function TempConverter() {
   const [celsius, setCelsius] = useState("");
@@ -6,7 +7,6 @@ function TempConverter() {
 
   const celsiusRef = useRef(null);
 
-  // Auto-focus Celsius input on load
   useEffect(() => {
     celsiusRef.current.focus();
   }, []);
@@ -42,31 +42,35 @@ function TempConverter() {
   };
 
   return (
-    <div style={{ padding: "20px", maxWidth: "300px" }}>
-      <h2>Temperature Converter</h2>
+    <div className="temp-container">
+      <h2>🌡️ Temperature Converter</h2>
 
-      <label>Celsius (°C)</label>
-      <input
-        ref={celsiusRef}
-        type="number"
-        value={celsius}
-        onChange={(e) => handleCelsiusChange(e.target.value)}
-        placeholder="Enter °C"
-      />
+      <div className="input-group">
+        <label>Celsius (°C)</label>
+        <input
+          ref={celsiusRef}
+          type="number"
+          value={celsius}
+          onChange={(e) => handleCelsiusChange(e.target.value)}
+          placeholder="Enter °C"
+        />
+      </div>
 
-      <br /><br />
+      <div className="input-group">
+        <label>Fahrenheit (°F)</label>
+        <input
+          type="number"
+          value={fahrenheit}
+          onChange={(e) => handleFahrenheitChange(e.target.value)}
+          placeholder="Enter °F"
+        />
+      </div>
 
-      <label>Fahrenheit (°F)</label>
-      <input
-        type="number"
-        value={fahrenheit}
-        onChange={(e) => handleFahrenheitChange(e.target.value)}
-        placeholder="Enter °F"
-      />
+      <button className="btn" onClick={reset}>
+        Reset
+      </button>
 
-      <br /><br />
-
-      <button onClick={reset}>Reset</button>
+      <div className="note">Enter a value in either field to convert.</div>
     </div>
   );
 }
