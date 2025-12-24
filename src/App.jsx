@@ -15,6 +15,7 @@ import UserProfile from './UserProfile.jsx'
 import Demoreducer from './Demoreducer.jsx'
 import ScientificCalculator from './ScientificCalculator.jsx'
 import BMIcalc from './BMIcalc.jsx'
+import TempConverter from './TempConverter.jsx'
 
 function App(){
   return(
@@ -36,6 +37,7 @@ function App(){
       <Demoreducer/>
       <ScientificCalculator/>
       <BMIcalc/>
+      <TempConverter/>
       <Button/>
       <Footer/>
     </>
