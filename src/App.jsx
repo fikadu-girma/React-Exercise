@@ -13,6 +13,7 @@ import MovieSearch from './MovieSearch.jsx'
 import MovieShowcase from './MoviesShowcase.jsx'
 import UserProfile from './UserProfile.jsx'
 import Demoreducer from './Demoreducer.jsx'
+import ScientificCalculator from './ScientificCalculator.jsx'
 
 function App(){
   return(
@@ -32,6 +33,7 @@ function App(){
       <MovieShowcase/>
       <UserProfile/>
       <Demoreducer/>
+      <ScientificCalculator/>
       <Button/>
       <Footer/>
     </>
