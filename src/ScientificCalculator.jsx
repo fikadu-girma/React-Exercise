@@ -26,7 +26,6 @@ function calculatorReducer(state, action) {
 
     case "CALCULATE":
       try {
-        // eslint-disable-next-line no-eval
         const evalResult = eval(state.expression);
         return {
           ...state,

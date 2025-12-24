@@ -14,6 +14,7 @@ import MovieShowcase from './MoviesShowcase.jsx'
 import UserProfile from './UserProfile.jsx'
 import Demoreducer from './Demoreducer.jsx'
 import ScientificCalculator from './ScientificCalculator.jsx'
+import BMIcalc from './BMIcalc.jsx'
 
 function App(){
   return(
@@ -34,6 +35,7 @@ function App(){
       <UserProfile/>
       <Demoreducer/>
       <ScientificCalculator/>
+      <BMIcalc/>
       <Button/>
       <Footer/>
     </>
