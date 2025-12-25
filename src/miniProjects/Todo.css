@@ -1,5 +1,5 @@
 body {
-  background: linear-gradient(135deg, #141e30, #243b55);
+  background: linear-gradient(135deg, #111827, #0f172a);
   font-family: system-ui, sans-serif;
   display: flex;
   justify-content: center;
@@ -9,20 +9,19 @@ body {
 
 .app-container {
   width: 100%;
-  max-width: 450px;
+  max-width: 520px;
 }
 
 .todo-card {
-  background: #0f172a;
-  border-radius: 18px;
+  background: #020617;
+  border-radius: 20px;
   padding: 24px;
-  box-shadow: 0 18px 40px rgba(0,0,0,.35);
+  box-shadow: 0 20px 50px rgba(0,0,0,.4);
 }
 
 h2 {
-  margin-bottom: 14px;
   text-align: center;
-  letter-spacing: .5px;
+  margin-bottom: 16px;
 }
 
 .input-row {
@@ -30,54 +29,73 @@ h2 {
   gap: 10px;
 }
 
-input {
-  flex: 1;
-  padding: 10px 12px;
+input, select {
+  padding: 10px;
   border-radius: 10px;
   border: none;
   outline: none;
-  background: #1e293b;
+  background: #0f172a;
   color: #fff;
 }
 
+input { flex: 1; }
+
 button {
-  padding: 10px 14px;
-  border-radius: 10px;
   border: none;
+  padding: 10px 14px;
+  border-radius: 12px;
   cursor: pointer;
   background: #38bdf8;
-  color: #0f172a;
+  color: #021431;
   font-weight: 600;
 }
 
-button:hover {
-  background: #7dd3fc;
+button:hover { background: #7dd3fc; }
+
+.filters {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.filters button {
+  flex: 1;
+  background: #0f172a;
+  color: #fff;
+}
+
+.filters button.active {
+  background: #38bdf8;
+  color: #021431;
 }
 
 .todo-list {
   list-style: none;
-  padding: 0;
   margin-top: 16px;
+  padding: 0;
 }
 
-.todo-list li {
+.todo-item {
   display: flex;
   justify-content: space-between;
-  background: #1e293b;
-  padding: 10px 12px;
-  border-radius: 10px;
+  padding: 12px;
+  border-radius: 12px;
+  background: #0f172a;
   margin-bottom: 8px;
   align-items: center;
-  transition: .2s;
 }
 
-.todo-list li span {
-  cursor: pointer;
-}
+.todo-item span { cursor: pointer; }
 
-.todo-list li.done span {
-  text-decoration: line-through;
+.todo-item.done span {
   opacity: .6;
+  text-decoration: line-through;
+}
+
+.actions {
+  display: flex;
+  gap: 6px;
+  align-items: center;
 }
 
 .delete {
@@ -85,12 +103,26 @@ button:hover {
   color: white;
 }
 
-.delete:hover {
-  background: #f87171;
+.delete:hover { background: #f87171; }
+
+.tag {
+  padding: 4px 8px;
+  border-radius: 8px;
+  font-size: 12px;
+  text-transform: capitalize;
 }
+
+.high { border-left: 4px solid #ef4444; }
+.high .tag { background: #7f1d1d; }
+
+.medium { border-left: 4px solid #facc15; }
+.medium .tag { background: #78350f; }
+
+.low { border-left: 4px solid #22c55e; }
+.low .tag { background: #064e3b; }
 
 .empty {
   text-align: center;
   opacity: .7;
-  margin-top: 10px;
+  padding-top: 10px;
 }
