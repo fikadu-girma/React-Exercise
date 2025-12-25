@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-import "./TodoApp.css";
 
 export default function TodoApp() {
   const [todos, setTodos] = useState(() => {
@@ -13,25 +12,64 @@ export default function TodoApp() {
   const [filter, setFilter] = useState("all");
   const [editId, setEditId] = useState(null);
 
+  // new fields
+  const [note, setNote] = useState("");
+  const [dueDate, setDueDate] = useState("");
+
   useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(todos));
   }, [todos]);
+
+  const addSubtask = (id, text) => {
+    if (!text.trim()) return;
+    setTodos(todos.map(t =>
+      t.id === id
+        ? { ...t, subtasks: [...t.subtasks, { id: Date.now(), text, done: false }] }
+        : t
+    ));
+  };
+
+  const toggleSubtask = (todoId, subId) => {
+    setTodos(todos.map(t =>
+      t.id === todoId
+        ? {
+            ...t,
+            subtasks: t.subtasks.map(s =>
+              s.id === subId ? { ...s, done: !s.done } : s
+            )
+          }
+        : t
+    ));
+  };
 
   const addTodo = () => {
     if (!input.trim()) return;
 
     if (editId) {
-      setTodos(todos.map(t => 
-        t.id === editId ? { ...t, text: input.trim(), priority } : t
+      setTodos(todos.map(t =>
+        t.id === editId
+          ? { ...t, text: input.trim(), priority, note, dueDate }
+          : t
       ));
       setEditId(null);
     } else {
       setTodos([
-        { id: Date.now(), text: input.trim(), done: false, priority },
+        {
+          id: Date.now(),
+          text: input.trim(),
+          done: false,
+          priority,
+          note,
+          dueDate,
+          subtasks: []
+        },
         ...todos,
       ]);
     }
+
     setInput("");
+    setNote("");
+    setDueDate("");
     setPriority("medium");
   };
 
@@ -44,6 +82,8 @@ export default function TodoApp() {
   const startEdit = (todo) => {
     setInput(todo.text);
     setPriority(todo.priority);
+    setNote(todo.note || "");
+    setDueDate(todo.dueDate || "");
     setEditId(todo.id);
   };
 
@@ -59,7 +99,6 @@ export default function TodoApp() {
     const [moved] = items.splice(result.source.index, 1);
     items.splice(result.destination.index, 0, moved);
 
-    // map reordered filtered list back to full list
     const newOrder = todos.map(t =>
       items.find(i => i.id === t.id) || t
     );
@@ -69,12 +108,12 @@ export default function TodoApp() {
   return (
     <div className="app-container">
       <div className="todo-card">
-        <h2>📝 Advanced Todo Manager</h2>
+        <h2>📝 Pro Todo Manager</h2>
 
         <div className="input-row">
           <input
             type="text"
-            placeholder="Add or edit a task..."
+            placeholder="Task title..."
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && addTodo()}
@@ -91,6 +130,22 @@ export default function TodoApp() {
           </button>
         </div>
 
+        <textarea
+          className="note-box"
+          placeholder="Notes / Description (optional)..."
+          value={note}
+          onChange={(e) => setNote(e.target.value)}
+        />
+
+        <div className="date-row">
+          <label>📅 Due Date:</label>
+          <input
+            type="date"
+            value={dueDate}
+            onChange={(e) => setDueDate(e.target.value)}
+          />
+        </div>
+
         <div className="filters">
           <button className={filter==="all" ? "active" : ""} onClick={() => setFilter("all")}>All</button>
           <button className={filter==="active" ? "active" : ""} onClick={() => setFilter("active")}>Active</button>
@@ -101,10 +156,6 @@ export default function TodoApp() {
           <Droppable droppableId="todoList">
             {(provided) => (
               <ul className="todo-list" ref={provided.innerRef} {...provided.droppableProps}>
-                {filteredTodos.length === 0 && (
-                  <p className="empty">No tasks — add something!</p>
-                )}
-
                 {filteredTodos.map((todo, index) => (
                   <Draggable key={todo.id} draggableId={String(todo.id)} index={index}>
                     {(provided) => (
@@ -114,9 +165,37 @@ export default function TodoApp() {
                         {...provided.draggableProps}
                         {...provided.dragHandleProps}
                       >
-                        <span onClick={() => toggleTodo(todo.id)}>
-                          {todo.text}
-                        </span>
+                        <div className="task-main">
+                          <span onClick={() => toggleTodo(todo.id)}>
+                            {todo.text}
+                          </span>
+
+                          {todo.dueDate && (
+                            <div className="due">
+                              ⏰ {todo.dueDate}
+                            </div>
+                          )}
+
+                          {todo.note && (
+                            <div className="note-preview">
+                              📝 {todo.note}
+                            </div>
+                          )}
+
+                          <div className="subtask-section">
+                            {todo.subtasks?.map(sub => (
+                              <div
+                                key={sub.id}
+                                className={`subtask ${sub.done ? "done" : ""}`}
+                                onClick={() => toggleSubtask(todo.id, sub.id)}
+                              >
+                                ▸ {sub.text}
+                              </div>
+                            ))}
+
+                            <SubTaskInput onAdd={(text) => addSubtask(todo.id, text)} />
+                          </div>
+                        </div>
 
                         <div className="actions">
                           <span className="tag">{todo.priority}</span>
@@ -127,13 +206,32 @@ export default function TodoApp() {
                     )}
                   </Draggable>
                 ))}
-
                 {provided.placeholder}
               </ul>
             )}
           </Droppable>
         </DragDropContext>
       </div>
+    </div>
+  );
+}
+
+function SubTaskInput({ onAdd }) {
+  const [text, setText] = useState("");
+  return (
+    <div className="subtask-input">
+      <input
+        type="text"
+        placeholder="Add sub-task..."
+        value={text}
+        onChange={(e) => setText(e.target.value)}
+        onKeyDown={(e) => {
+          if (e.key === "Enter") {
+            onAdd(text);
+            setText("");
+          }
+        }}
+      />
     </div>
   );
 }
