@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import "./TodoApp.css";
 
 export default function TodoApp() {
   const [todos, setTodos] = useState(() => {
