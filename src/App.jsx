@@ -16,6 +16,7 @@ import Demoreducer from './Demoreducer.jsx'
 import ScientificCalculator from './ScientificCalculator.jsx'
 import BMIcalc from './BMIcalc.jsx'
 import TempConverter from './TempConverter.jsx'
+import TodoApp from './miniProjects/TodoApp.jsx'
 
 function App(){
   return(
@@ -38,6 +39,7 @@ function App(){
       <ScientificCalculator/>
       <BMIcalc/>
       <TempConverter/>
+      <TodoApp/>
       <Button/>
       <Footer/>
     </>

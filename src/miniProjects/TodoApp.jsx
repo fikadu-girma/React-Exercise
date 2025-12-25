@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import "./TodoApp.css";
 
+
 export default function TodoApp() {
   const [todos, setTodos] = useState(() => {
     const saved = localStorage.getItem("todos");
@@ -13,12 +14,58 @@ export default function TodoApp() {
   const [filter, setFilter] = useState("all");
   const [editId, setEditId] = useState(null);
 
-  // new fields
   const [note, setNote] = useState("");
   const [dueDate, setDueDate] = useState("");
 
+  // 🌗 THEME STATE (persisted)
+  const [theme, setTheme] = useState(() =>
+    localStorage.getItem("theme") || "dark"
+  );
+
+  useEffect(() => {
+    document.body.setAttribute("data-theme", theme);
+    localStorage.setItem("theme", theme);
+  }, [theme]);
+
   useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(todos));
+  }, [todos]);
+
+  // 🔔 ASK FOR NOTIFICATION PERMISSION
+  useEffect(() => {
+    if ("Notification" in window) {
+      Notification.requestPermission();
+    }
+  }, []);
+
+  // 🔔 CHECK DUE REMINDERS (runs every 30 seconds)
+  useEffect(() => {
+    const interval = setInterval(() => {
+      todos.forEach(todo => {
+        if (!todo.dueDate || todo.done || todo.notified) return;
+
+        const now = new Date();
+        const due = new Date(todo.dueDate);
+
+        if (now >= due) {
+          // Browser notification
+          if (Notification.permission === "granted") {
+            new Notification("⏰ Reminder Due!", {
+              body: todo.text,
+            });
+          }
+
+          // Mark as notified
+          setTodos(prev =>
+            prev.map(t =>
+              t.id === todo.id ? { ...t, notified: true } : t
+            )
+          );
+        }
+      });
+    }, 30000);
+
+    return () => clearInterval(interval);
   }, [todos]);
 
   const addSubtask = (id, text) => {
@@ -49,7 +96,7 @@ export default function TodoApp() {
     if (editId) {
       setTodos(todos.map(t =>
         t.id === editId
-          ? { ...t, text: input.trim(), priority, note, dueDate }
+          ? { ...t, text: input.trim(), priority, note, dueDate, notified: false }
           : t
       ));
       setEditId(null);
@@ -62,6 +109,7 @@ export default function TodoApp() {
           priority,
           note,
           dueDate,
+          notified: false,
           subtasks: []
         },
         ...todos,
@@ -109,7 +157,17 @@ export default function TodoApp() {
   return (
     <div className="app-container">
       <div className="todo-card">
-        <h2>📝 Pro Todo Manager</h2>
+        <div className="top-bar">
+          <h2>📝 Pro Todo Manager</h2>
+
+          {/* 🌓 THEME TOGGLE */}
+          <button
+            className="theme-toggle"
+            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+          >
+            {theme === "dark" ? "🌞 Light" : "🌙 Dark"}
+          </button>
+        </div>
 
         <div className="input-row">
           <input
@@ -141,7 +199,7 @@ export default function TodoApp() {
         <div className="date-row">
           <label>📅 Due Date:</label>
           <input
-            type="date"
+            type="datetime-local"
             value={dueDate}
             onChange={(e) => setDueDate(e.target.value)}
           />
@@ -173,7 +231,7 @@ export default function TodoApp() {
 
                           {todo.dueDate && (
                             <div className="due">
-                              ⏰ {todo.dueDate}
+                              ⏰ {new Date(todo.dueDate).toLocaleString()}
                             </div>
                           )}
 

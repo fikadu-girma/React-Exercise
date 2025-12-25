@@ -182,3 +182,46 @@ button:hover { background: #7dd3fc; }
   color: white;
   margin-top: 6px;
 }
+
+/* THEME ROOTS */
+body[data-theme="dark"] {
+  --bg: #0b1221;
+  --card: #020617;
+  --text: #ffffff;
+  --input: #0f172a;
+}
+
+body[data-theme="light"] {
+  --bg: #eef2ff;
+  --card: #ffffff;
+  --text: #020617;
+  --input: #f3f4f6;
+}
+
+/* APPLY THEME */
+body {
+  background: var(--bg);
+  color: var(--text);
+}
+
+.todo-card {
+  background: var(--card);
+}
+
+input, textarea, select {
+  background: var(--input);
+  color: var(--text);
+}
+
+/* Theme Button */
+.theme-toggle {
+  background: #38bdf8;
+  color: #021431;
+}
+
+/* Minor spacing */
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
