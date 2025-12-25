@@ -17,7 +17,6 @@ export default function TodoApp() {
   const [note, setNote] = useState("");
   const [dueDate, setDueDate] = useState("");
 
-  // 🌗 THEME STATE (persisted)
   const [theme, setTheme] = useState(() =>
     localStorage.getItem("theme") || "dark"
   );
@@ -31,14 +30,12 @@ export default function TodoApp() {
     localStorage.setItem("todos", JSON.stringify(todos));
   }, [todos]);
 
-  // 🔔 ASK FOR NOTIFICATION PERMISSION
   useEffect(() => {
     if ("Notification" in window) {
       Notification.requestPermission();
     }
   }, []);
 
-  // 🔔 CHECK DUE REMINDERS (runs every 30 seconds)
   useEffect(() => {
     const interval = setInterval(() => {
       todos.forEach(todo => {
@@ -48,14 +45,12 @@ export default function TodoApp() {
         const due = new Date(todo.dueDate);
 
         if (now >= due) {
-          // Browser notification
           if (Notification.permission === "granted") {
             new Notification("⏰ Reminder Due!", {
               body: todo.text,
             });
           }
 
-          // Mark as notified
           setTodos(prev =>
             prev.map(t =>
               t.id === todo.id ? { ...t, notified: true } : t
@@ -294,3 +289,4 @@ function SubTaskInput({ onAdd }) {
     </div>
   );
 }
+
