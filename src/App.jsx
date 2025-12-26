@@ -17,7 +17,7 @@ import ScientificCalculator from './ScientificCalculator.jsx'
 import BMIcalc from './BMIcalc.jsx'
 import TempConverter from './TempConverter.jsx'
 import TodoApp from './miniProjects/TodoApp.jsx'
-import Stopwatch from './miniProjects/Stopwatch.jsx'
+import StopwatchTimer from './miniProjects/StopwatchTimer.jsx'
 
 function App(){
   return(
@@ -41,7 +41,7 @@ function App(){
       <BMIcalc/>
       <TempConverter/>
       <TodoApp/>
-      <Stopwatch/>
+      <StopwatchTimer/>
       <Button/>
       <Footer/>
     </>
