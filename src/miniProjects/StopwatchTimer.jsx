@@ -1,8 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 
 export default function StopwatchTimer() {
-  const [mode, setMode] = useState("stopwatch"); // stopwatch | countdown
-
+  const [mode, setMode] = useState("stopwatch");
   const [time, setTime] = useState(0);
   const [isRunning, setIsRunning] = useState(false);
   const [laps, setLaps] = useState([]);
@@ -14,7 +13,7 @@ export default function StopwatchTimer() {
   const intervalRef = useRef(null);
   const startTimeRef = useRef(null);
 
-  // ---------- Stopwatch Controls ----------
+  // Stopwatch
   const startStopwatch = () => {
     if (isRunning) return;
     setIsRunning(true);
@@ -31,7 +30,7 @@ export default function StopwatchTimer() {
     setLaps(prev => [...prev, time]);
   };
 
-  // ---------- Countdown Controls ----------
+  // Countdown
   const startCountdown = () => {
     if (isRunning) return;
 
@@ -46,7 +45,6 @@ export default function StopwatchTimer() {
     }
 
     setIsRunning(true);
-
     startTimeRef.current = Date.now();
 
     intervalRef.current = setInterval(() => {
@@ -63,7 +61,6 @@ export default function StopwatchTimer() {
     }, 50);
   };
 
-  // ---------- Shared ----------
   const pause = () => {
     setIsRunning(false);
     clearInterval(intervalRef.current);
@@ -78,18 +75,31 @@ export default function StopwatchTimer() {
 
   useEffect(() => () => clearInterval(intervalRef.current), []);
 
+  // Format mm:ss.ms
   const formatTime = (ms) => {
-    const minutes = Math.floor(ms / 60000);
-    const seconds = Math.floor((ms % 60000) / 1000);
-    const milliseconds = Math.floor((ms % 1000) / 10);
-
-    return `${String(minutes).padStart(2, "0")}:` +
-           `${String(seconds).padStart(2, "0")}.` +
-           `${String(milliseconds).padStart(2, "0")}`;
+    const m = Math.floor(ms / 60000);
+    const s = Math.floor((ms % 60000) / 1000);
+    const ms2 = Math.floor((ms % 1000) / 10);
+    return `${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}.${String(ms2).padStart(2,"0")}`;
   };
 
+  // -------- 🎨 Dynamic Background Color Logic --------
+  let backgroundColor = "#22c55e"; // default green
+
+  if (mode === "countdown" && initialCountdown > 0) {
+    const ratio = time / initialCountdown;
+
+    if (ratio <= 0.10) {
+      backgroundColor = "#ef4444"; // RED (≤10%)
+    } else if (ratio <= 0.50) {
+      backgroundColor = "#3b82f6"; // BLUE (≤50%)
+    } else {
+      backgroundColor = "#22c55e"; // GREEN ( >50% )
+    }
+  }
+
   return (
-    <div style={styles.wrapper}>
+    <div style={{ ...styles.wrapper, background: backgroundColor }}>
       <h2 style={styles.title}>⏱ Stopwatch & ⏳ Countdown</h2>
 
       <div style={styles.modeSwitch}>
@@ -161,7 +171,6 @@ export default function StopwatchTimer() {
   );
 }
 
-
 // ---------- Styles ----------
 const styles = {
   wrapper: {
@@ -169,11 +178,11 @@ const styles = {
     margin: "40px auto",
     padding: "22px",
     borderRadius: "16px",
-    background: "linear-gradient(135deg,#020617,#111827)",
     color: "#fff",
     textAlign: "center",
     boxShadow: "0 10px 25px rgba(0,0,0,.45)",
-    fontFamily: "system-ui, sans-serif"
+    fontFamily: "system-ui, sans-serif",
+    transition: "background .3s ease"
   },
   title: { marginBottom: 10 },
   modeSwitch: { display: "flex", gap: 8, justifyContent: "center", marginBottom: 12 },
@@ -182,7 +191,7 @@ const styles = {
     borderRadius: 10,
     border: "1px solid #334155",
     background: "transparent",
-    color: "#cbd5f5",
+    color: "#e5e7eb",
     cursor: "pointer"
   },
   activeTab: {
