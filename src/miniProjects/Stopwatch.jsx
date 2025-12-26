@@ -1,14 +1,13 @@
 import { useState, useRef, useEffect } from "react";
 
 export default function Stopwatch() {
-  const [time, setTime] = useState(0);           // milliseconds
+  const [time, setTime] = useState(0);           
   const [isRunning, setIsRunning] = useState(false);
   const [laps, setLaps] = useState([]);
 
   const intervalRef = useRef(null);
   const startTimeRef = useRef(null);
 
-  // Start / Resume timer
   const start = () => {
     if (isRunning) return;
     setIsRunning(true);
@@ -20,31 +19,26 @@ export default function Stopwatch() {
     }, 10);
   };
 
-  // Pause timer
   const pause = () => {
     setIsRunning(false);
     clearInterval(intervalRef.current);
   };
 
-  // Reset timer
   const reset = () => {
     pause();
     setTime(0);
     setLaps([]);
   };
 
-  // Add lap
   const addLap = () => {
     if (!isRunning) return;
     setLaps(prev => [...prev, time]);
   };
 
-  // Cleanup
   useEffect(() => {
     return () => clearInterval(intervalRef.current);
   }, []);
 
-  // Format time mm:ss.ms
   const formatTime = (ms) => {
     const minutes = Math.floor(ms / 60000);
     const seconds = Math.floor((ms % 60000) / 1000);
