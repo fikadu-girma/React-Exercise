@@ -18,6 +18,8 @@ import BMIcalc from './BMIcalc.jsx'
 import TempConverter from './TempConverter.jsx'
 import TodoApp from './miniProjects/TodoApp.jsx'
 import StopwatchTimer from './miniProjects/StopwatchTimer.jsx'
+import GallerySelector from './miniProjects/GallerySelector.js'
+import Calculator from './Calculator.js'
 
 function App(){
   return(
@@ -42,6 +44,8 @@ function App(){
       <TempConverter/>
       <TodoApp/>
       <StopwatchTimer/>
+      <GallerySelector/>
+      <Calculator/>
       <Button/>
       <Footer/>
     </>
