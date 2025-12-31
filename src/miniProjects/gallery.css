@@ -1,0 +1,51 @@
+.gallery-wrapper {
+  padding: 20px;
+  font-family: Arial;
+  text-align: center;
+}
+
+.gallery-grid {
+  margin-top: 12px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 12px;
+}
+
+.gallery-item {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: 0.2s;
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+}
+
+.gallery-item:hover {
+  transform: scale(1.02);
+}
+
+.gallery-item.selected {
+  border-color: #22c55e;
+  box-shadow: 0 0 10px rgba(34, 197, 94, 0.6);
+}
+
+.check {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: #22c55e;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.footer {
+  margin-top: 14px;
+}
