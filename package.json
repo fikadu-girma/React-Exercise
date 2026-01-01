@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "dev1": "ts-node-dev src/miniProjects/server.ts",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"
