@@ -20,6 +20,9 @@ import TodoApp from './miniProjects/TodoApp.jsx'
 import StopwatchTimer from './miniProjects/StopwatchTimer.jsx'
 import GallerySelector from './miniProjects/GallerySelector.js'
 import Calculator from './Calculator.js'
+import Movies from './miniProjects/Movies.js'
+import PhotoGallery from './miniProjects/PhotoGallery.js'
+import CreatePost from './miniProjects/CreatePost.js'
 
 function App(){
   return(
@@ -46,6 +49,10 @@ function App(){
       <StopwatchTimer/>
       <GallerySelector/>
       <Calculator/>
+      <Movies/>
+      <PhotoGallery/>
+      <CreatePost/>
+      <Lists/>
       <Button/>
       <Footer/>
     </>
