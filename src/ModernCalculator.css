@@ -4,83 +4,137 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
   font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   padding: 20px;
+  position: relative;
+}
+
+.calculator-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 40% 40%, rgba(120, 119, 198, 0.2) 0%, transparent 50%);
+  pointer-events: none;
 }
 
 .calculator {
-  width: 350px;
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(20px);
-  border-radius: 24px;
+  width: 360px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(25px);
+  border-radius: 28px;
   box-shadow: 
-    0 20px 40px rgba(0, 0, 0, 0.1),
-    0 0 0 1px rgba(255, 255, 255, 0.2);
+    0 25px 50px rgba(0, 0, 0, 0.15),
+    0 0 0 1px rgba(255, 255, 255, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
   overflow: hidden;
-  transition: transform 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.calculator::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
 }
 
 .calculator:hover {
-  transform: translateY(-5px);
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 
+    0 35px 70px rgba(0, 0, 0, 0.2),
+    0 0 0 1px rgba(255, 255, 255, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5);
 }
 
 /* Display Section */
 .display-section {
-  background: linear-gradient(135deg, #1a1a1a, #2d2d2d);
+  background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
   color: white;
-  padding: 30px 25px 20px;
+  padding: 35px 30px 25px;
   text-align: right;
+  position: relative;
+  overflow: hidden;
+}
+
+.display-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+    linear-gradient(135deg, transparent 0%, rgba(255, 255, 255, 0.05) 100%);
+  pointer-events: none;
+}
+
+.display-section > * {
+  position: relative;
+  z-index: 1;
 }
 
 .history {
-  height: 20px;
-  margin-bottom: 10px;
+  height: 24px;
+  margin-bottom: 12px;
 }
 
 .last-calculation {
-  font-size: 14px;
-  color: rgba(255, 255, 255, 0.6);
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.7);
   font-weight: 300;
+  letter-spacing: 0.5px;
 }
 
 .main-display {
-  font-size: 48px;
-  font-weight: 200;
+  font-size: 52px;
+  font-weight: 100;
   line-height: 1;
-  min-height: 60px;
+  min-height: 65px;
   display: flex;
   align-items: center;
   justify-content: flex-end;
   word-break: break-all;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
 
 /* Button Grid */
 .button-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 1px;
-  background: #f0f0f0;
-  padding: 1px;
+  gap: 2px;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 2px;
 }
 
 /* Button Base Styles */
 .btn {
-  height: 70px;
+  height: 75px;
   border: none;
-  font-size: 24px;
+  font-size: 26px;
   font-weight: 400;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
   overflow: hidden;
+  backdrop-filter: blur(10px);
 }
 
 .btn:active {
-  transform: scale(0.95);
+  transform: scale(0.92);
 }
 
 .btn::before {
@@ -90,23 +144,38 @@
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-  transition: left 0.5s;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  transition: left 0.6s ease;
 }
 
 .btn:hover::before {
   left: 100%;
 }
 
+.btn::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.2);
+}
+
 /* Number Buttons */
 .btn.number {
-  background: #ffffff;
-  color: #333;
+  background: rgba(255, 255, 255, 0.9);
+  color: #2d3748;
   font-weight: 300;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8);
 }
 
 .btn.number:hover {
-  background: #f8f9fa;
+  background: rgba(255, 255, 255, 1);
+  transform: translateY(-2px);
+  box-shadow: 
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .btn.number.zero {
@@ -115,13 +184,18 @@
 
 /* Function Buttons */
 .btn.function {
-  background: #e9ecef;
-  color: #333;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
   font-weight: 400;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3);
 }
 
 .btn.function:hover {
-  background: #dee2e6;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 
+    inset 0 1px 0 rgba(255, 255, 255, 0.4),
+    0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 /* Operator Buttons */
@@ -129,10 +203,17 @@
   background: linear-gradient(135deg, #ff6b6b, #ee5a52);
   color: white;
   font-weight: 500;
+  box-shadow: 
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    0 2px 8px rgba(238, 90, 82, 0.3);
 }
 
 .btn.operator:hover {
   background: linear-gradient(135deg, #ff5252, #e53935);
+  transform: translateY(-3px);
+  box-shadow: 
+    inset 0 1px 0 rgba(255, 255, 255, 0.4),
+    0 6px 20px rgba(238, 90, 82, 0.4);
 }
 
 /* Equals Button */
@@ -140,22 +221,36 @@
   background: linear-gradient(135deg, #51cf66, #40c057);
   color: white;
   font-weight: 600;
-  font-size: 28px;
+  font-size: 30px;
+  box-shadow: 
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    0 2px 8px rgba(64, 192, 87, 0.3);
 }
 
 .btn.equals:hover {
   background: linear-gradient(135deg, #40c057, #37b24d);
+  transform: translateY(-3px);
+  box-shadow: 
+    inset 0 1px 0 rgba(255, 255, 255, 0.4),
+    0 6px 20px rgba(64, 192, 87, 0.4);
 }
 
 /* Backspace Button */
 .btn.backspace {
-  background: #ffd43b;
+  background: linear-gradient(135deg, #ffd43b, #fab005);
   color: #333;
   font-weight: 500;
+  box-shadow: 
+    inset 0 1px 0 rgba(255, 255, 255, 0.4),
+    0 2px 8px rgba(250, 176, 5, 0.3);
 }
 
 .btn.backspace:hover {
-  background: #ffcc02;
+  background: linear-gradient(135deg, #ffcc02, #f59f00);
+  transform: translateY(-3px);
+  box-shadow: 
+    inset 0 1px 0 rgba(255, 255, 255, 0.5),
+    0 6px 20px rgba(250, 176, 5, 0.4);
 }
 
 /* History Panel */
