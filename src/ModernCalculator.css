@@ -1,0 +1,271 @@
+/* Modern Calculator Styles */
+.calculator-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  padding: 20px;
+}
+
+.calculator {
+  width: 350px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  border-radius: 24px;
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.1),
+    0 0 0 1px rgba(255, 255, 255, 0.2);
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+.calculator:hover {
+  transform: translateY(-5px);
+}
+
+/* Display Section */
+.display-section {
+  background: linear-gradient(135deg, #1a1a1a, #2d2d2d);
+  color: white;
+  padding: 30px 25px 20px;
+  text-align: right;
+}
+
+.history {
+  height: 20px;
+  margin-bottom: 10px;
+}
+
+.last-calculation {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.6);
+  font-weight: 300;
+}
+
+.main-display {
+  font-size: 48px;
+  font-weight: 200;
+  line-height: 1;
+  min-height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  word-break: break-all;
+}
+
+/* Button Grid */
+.button-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: #f0f0f0;
+  padding: 1px;
+}
+
+/* Button Base Styles */
+.btn {
+  height: 70px;
+  border: none;
+  font-size: 24px;
+  font-weight: 400;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn:active {
+  transform: scale(0.95);
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.5s;
+}
+
+.btn:hover::before {
+  left: 100%;
+}
+
+/* Number Buttons */
+.btn.number {
+  background: #ffffff;
+  color: #333;
+  font-weight: 300;
+}
+
+.btn.number:hover {
+  background: #f8f9fa;
+}
+
+.btn.number.zero {
+  grid-column: span 2;
+}
+
+/* Function Buttons */
+.btn.function {
+  background: #e9ecef;
+  color: #333;
+  font-weight: 400;
+}
+
+.btn.function:hover {
+  background: #dee2e6;
+}
+
+/* Operator Buttons */
+.btn.operator {
+  background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+  color: white;
+  font-weight: 500;
+}
+
+.btn.operator:hover {
+  background: linear-gradient(135deg, #ff5252, #e53935);
+}
+
+/* Equals Button */
+.btn.equals {
+  background: linear-gradient(135deg, #51cf66, #40c057);
+  color: white;
+  font-weight: 600;
+  font-size: 28px;
+}
+
+.btn.equals:hover {
+  background: linear-gradient(135deg, #40c057, #37b24d);
+}
+
+/* Backspace Button */
+.btn.backspace {
+  background: #ffd43b;
+  color: #333;
+  font-weight: 500;
+}
+
+.btn.backspace:hover {
+  background: #ffcc02;
+}
+
+/* History Panel */
+.history-panel {
+  background: #f8f9fa;
+  padding: 20px 25px;
+  border-top: 1px solid #e9ecef;
+  max-height: 150px;
+  overflow-y: auto;
+}
+
+.history-panel h4 {
+  margin: 0 0 15px 0;
+  font-size: 14px;
+  color: #666;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.history-item {
+  font-size: 13px;
+  color: #888;
+  margin-bottom: 8px;
+  padding: 8px 12px;
+  background: white;
+  border-radius: 8px;
+  border-left: 3px solid #667eea;
+  font-family: 'SF Mono', Monaco, 'Cascadia Code', monospace;
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+  .calculator-container {
+    padding: 10px;
+  }
+  
+  .calculator {
+    width: 100%;
+    max-width: 350px;
+  }
+  
+  .btn {
+    height: 60px;
+    font-size: 20px;
+  }
+  
+  .main-display {
+    font-size: 36px;
+  }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+  .calculator-container {
+    background: linear-gradient(135deg, #2d3748 0%, #1a202c 100%);
+  }
+  
+  .calculator {
+    background: rgba(45, 55, 72, 0.95);
+    box-shadow: 
+      0 20px 40px rgba(0, 0, 0, 0.3),
+      0 0 0 1px rgba(255, 255, 255, 0.1);
+  }
+  
+  .btn.number {
+    background: #4a5568;
+    color: #e2e8f0;
+  }
+  
+  .btn.number:hover {
+    background: #5a6578;
+  }
+  
+  .btn.function {
+    background: #2d3748;
+    color: #e2e8f0;
+  }
+  
+  .btn.function:hover {
+    background: #3d4758;
+  }
+  
+  .history-panel {
+    background: #2d3748;
+    border-top-color: #4a5568;
+  }
+  
+  .history-item {
+    background: #4a5568;
+    color: #e2e8f0;
+  }
+}
+
+/* Animation for button press */
+@keyframes buttonPress {
+  0% { transform: scale(1); }
+  50% { transform: scale(0.95); }
+  100% { transform: scale(1); }
+}
+
+.btn:active {
+  animation: buttonPress 0.1s ease;
+}
+
+/* Smooth transitions */
+* {
+  box-sizing: border-box;
+}
+
+.calculator * {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
